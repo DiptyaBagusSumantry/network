@@ -5,10 +5,14 @@ const AuthController = require("../controllers/AuthController.js");
 // const PatientController = require("../controllers/MonitoringController.js");
 // const RekamMedisController = require("../controllers/RouterController.js");
 // const TransactionController = require("../controllers/TransactionController.js");
-
 const { IsAdmin } = require("../middlewares/chekRole.js");
+const ResponseController = require("../controllers/ResponseController.js");
 
 router.post("/login", AuthController.Login);
+router.get("/count-dashboard", AuthController.countDashbaord);
+router.get("/table-json", verifyToken, ResponseController.tableJson);
+router.get("/table-xml", verifyToken, ResponseController.tableXML);
+router.get("/detail-sensor",verifyToken, ResponseController.detailSensor);
 // router.post("/register", AuthController.register);
 // router.post("/logout", verifyToken, AuthController.Logout);
 // router.get("/fetch", verifyToken, AuthController.Fetch);

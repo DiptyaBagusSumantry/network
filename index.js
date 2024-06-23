@@ -54,6 +54,6 @@ app.use(
 
 app.use(router);
 
-app.listen(process.env.PORT || 5003, () => {
+app.listen(process.env.PORT || 5006, () => {
   console.log("Server running at port 5003");
 });

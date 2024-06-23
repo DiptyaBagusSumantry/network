@@ -4,6 +4,11 @@ function handlerError(res, error) {
       code: 500,
       message: error.errors[0].message,
     });
+  } else if (error.errorConnection) {
+    return res.status(500).json({
+      code: 500,
+      message: error.errorConnection,
+    })
   } else {
     return res.status(500).json({
       code: 500,
@@ -21,7 +26,7 @@ function handleGet(res, data) {
   res.status(200).json({
     code: 200,
     message: "Success Get Data",
-    data: data,
+    data: data ? data : null,
   });
 }
 function handleGetPaginator(res, result) {

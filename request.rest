@@ -1,0 +1,48 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzYjY0NmVhLTI2YjAtNGNiZi1hZTRmLTQzZTY2ODk3YTM5NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxODk3OTAwNiwiZXhwIjoxNzE5MzI0NjA2fQ.pum6bKahidRehU-mmNEDnzGxlVCrSItzqzO0XPAJick
+
+//login
+###
+POST http://localhost:5006/login
+Content-Type: application/json
+
+{
+    "username" : "admin",
+    "password" : "Admin1234!"
+}
+
+//table JSON
+//QUERY ATAU PARAMS
+# content
+# columns
+# filter_device
+# filter_type
+# output
+# sensor_id
+# filter_session
+# count
+# noraw
+# id
+# usecaption
+# filter_user
+
+###
+GET http://localhost:5006/table-json?content=
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+//table XML
+//QUERY ATAU PARAMS
+# content
+# id
+###
+GET http://localhost:5006/table-xml?content=
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+//detail sensor
+//QUERY ATAU PARAMS
+# id
+###
+GET http://localhost:5006/detail-sensor?content=
+Content-Type: application/json
+Authorization: Bearer {{token}}
