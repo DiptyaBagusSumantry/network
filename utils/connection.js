@@ -44,8 +44,12 @@ class connectionPRTG {
       apitoken: apiToken,
       ...(param.content && { content: param.content }),
       ...(param.id && { id: param.id }),
+      ...(param.sdate && { id: param.sdate }),
+      ...(param.edate && { id: param.edate }),
+      ...(param.usecaption && { id: param.usecaption }),
     };
     try {
+      
       const response = await axiosInstance.get(`/api/table.xml`, { params });
       // console.log(response.data);
       return response.data;
