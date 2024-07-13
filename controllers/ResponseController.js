@@ -25,7 +25,7 @@ class ResponseController {
         filter_parentid: req.query.filter_parentid,
       });
     }else if (req.params.type == "datavalues") {
-      await Models.ListSensor.create({
+      await Models.DataValues.create({
         prtg_version: data["prtg-version"],
         treesize,
         values: JSON.stringify(values),

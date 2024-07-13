@@ -27,6 +27,7 @@ Content-Type: application/json
 
 #type
 #listdevice
+#listsensor
 # datavalues
 
 ###
