@@ -11,7 +11,7 @@ const ListSensor = (sequelizeInstance) => {
         allowNull: false,
         unique: "id",
       },
-      prtgVersion: {
+      prtg_version: {
         type: Sequelize.STRING,
       },
       treesize: {
