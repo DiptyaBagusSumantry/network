@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzYjY0NmVhLTI2YjAtNGNiZi1hZTRmLTQzZTY2ODk3YTM5NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxODk3OTAwNiwiZXhwIjoxNzE5MzI0NjA2fQ.pum6bKahidRehU-mmNEDnzGxlVCrSItzqzO0XPAJick
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFhMGZmMzM4LTk3ZjUtNDBjMC1hZjVkLTQ0NjhjNGEwZTQ3OCIsImlhdCI6MTcyMDgzNTg4MCwiZXhwIjoxNzIxMTgxNDgwfQ.oQiZU1i4lMYzkpseh4kPI6v3en-N2oW0JcE_X0w989E
 
 //login
 ###
@@ -26,7 +26,7 @@ Content-Type: application/json
 # filter_user
 
 ###
-GET http://localhost:5006/table-json?content=
+GET http://localhost:5006/table-json?filter_user=2068
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
