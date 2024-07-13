@@ -25,7 +25,6 @@ class ResponseController {
         filter_parentid: req.query.filter_parentid,
       });
     }
-
     if (data.errorConnection) {
       handlerError(res, data);
     }
@@ -40,6 +39,11 @@ class ResponseController {
   }
   static async detailSensor(req, res) {
     const data = await connectionPRTG.detailSensor(req.query);
+    await Models.DetailSensor.create({
+      prtg_version: data["prtg-version"],
+      sensordata: JSON.stringify(sensordata),
+      sensor_id: req.query.id,
+    });
     if (data.errorConnection) {
       handlerError(res, data);
     }

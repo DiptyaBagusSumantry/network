@@ -11,14 +11,14 @@ const DetailSensor = (sequelizeInstance) => {
         allowNull: false,
         unique: "id",
       },
-      prtgversion: {
+      prtg_version: {
         type: Sequelize.STRING,
       },
       sensordata: {
-        type: Sequelize.TEXT("long")
+        type: Sequelize.TEXT("long"),
       },
       sensorId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
     },
     {
