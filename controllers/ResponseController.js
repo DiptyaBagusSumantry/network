@@ -39,9 +39,10 @@ class ResponseController {
   }
   static async detailSensor(req, res) {
     const data = await connectionPRTG.detailSensor(req.query);
+    const{prtgversion, sensordata} = data
     await Models.DetailSensor.create({
-      prtg_version: data["prtg-version"],
-      sensordata: JSON.stringify(data.sensordata),
+      prtg_version: prtgversion,
+      sensordata: JSON.stringify(sensordata),
       sensorId: req.query.id,
     });
     if (data.errorConnection) {
