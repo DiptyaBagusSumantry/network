@@ -6,7 +6,7 @@ const { Json } = require("sequelize/lib/utils");
 class ResponseController {
   static async tableJson(req, res) {
     const data = await connectionPRTG.tableJson(req.query);
-    const { treesize, devices } = data;
+    const { treesize, devices, sensor } = data;
     if (!req.params.type) {
       return res.send("please insert type");
     }
