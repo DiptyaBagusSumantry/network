@@ -1,8 +1,10 @@
 const dbConfig = require("../config/config.js");
 const Sequelize = require("sequelize");
 const User = require("./UserModels.js");
-const AccessPoint = require("./AccessPointModel.js")
-const Monitoring = require("./MonitoringModel.js")
+const ListDevice = require("./ListDevice.js")
+const ListSensor = require("./ListSensor.js")
+const DetailSensor = require("./DetailSensor.js")
+const DataValues = require("./DataValues.js")
 const Router = require("./RouterModel.js")
 
 const sequelizeInstance = new Sequelize(
@@ -25,9 +27,10 @@ const sequelizeInstance = new Sequelize(
 const db = {};
 db.sequelizeInstance = sequelizeInstance;
 db.User = User(sequelizeInstance);
-db.AccessPoint = AccessPoint(sequelizeInstance);
-db.Monitoring = Monitoring(sequelizeInstance);
-db.Router = Router(sequelizeInstance);
+db.ListDevice = ListDevice(sequelizeInstance);
+db.ListSensor = ListSensor(sequelizeInstance);
+db.DetailSensor = DetailSensor(sequelizeInstance);
+db.DataValues = DataValues(sequelizeInstance);
 
 // // History Patient - Patient
 // db.Patient.hasMany(db.HistoryPatient, {
