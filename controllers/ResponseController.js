@@ -26,7 +26,7 @@ class ResponseController {
       });
     }else if (req.params.type == "datavalues") {
       await Models.DataValues.create({
-        prtg_version: data["prtg-version"],
+        prtgversion: data["prtg-version"],
         treesize,
         values: JSON.stringify(values),
         sensorId: req.query.id,
