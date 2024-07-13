@@ -39,25 +39,26 @@ class connectionPRTG {
       return {errorConnection: error.response.data};
     }
   }
-  static async tableXML(param) {
-    const params = {
-      apitoken: apiToken,
-      ...(param.content && { content: param.content }),
-      ...(param.id && { id: param.id }),
-    };
-    try {
-      const response = await axiosInstance.get(`/api/table.xml`, { params });
-      // console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log(error.response.data);
-      return { errorConnection: error.response.data };
-    }
-  }
+  // static async tableXML(param) {
+  //   const params = {
+  //     apitoken: apiToken,
+  //     ...(param.content && { content: param.content }),
+  //     ...(param.id && { id: param.id }),
+  //   };
+  //   try {
+  //     const response = await axiosInstance.get(`/api/table.xml`, { params });
+  //     // console.log(response.data);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.log(error.response.data);
+  //     return { errorConnection: error.response.data };
+  //   }
+  // }
   static async detailSensor(param) {
     const params = {
       apitoken: apiToken,
       ...(param.id && { id: param.id }),
+      ...(param.usecaption && { usecaption: param.usecaption }),
     };
     try {
       const response = await axiosInstance.get(`/api/getsensordetails.json`, {
