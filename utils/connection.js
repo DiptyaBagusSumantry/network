@@ -44,9 +44,10 @@ class connectionPRTG {
       apitoken: apiToken,
       ...(param.content && { content: param.content }),
       ...(param.id && { id: param.id }),
-      ...(param.sdate && { id: param.sdate }),
-      ...(param.edate && { id: param.edate }),
-      ...(param.usecaption && { id: param.usecaption }),
+      ...(param.avg && { avg: param.avg }),
+      ...(param.sdate && { sdate: param.sdate }),
+      ...(param.edate && { edate: param.edate }),
+      ...(param.usecaption && { usecaption: param.usecaption }),
     };
     try {
       
