@@ -27,6 +27,7 @@ class connectionPRTG {
       ...(param.id && { id: param.id }),
       ...(param.usecaption && { usecaption: param.usecaption }),
       ...(param.filter_user && { filter_user: param.filter_user }),
+      ...(param.filter_parentid && { filter_parentid: param.filter_parentid }),
     };
     // console.log(params);
     try {
