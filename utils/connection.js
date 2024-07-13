@@ -15,9 +15,8 @@ class connectionPRTG {
   static async tableJson(param) {
     const params = {
       apitoken: apiToken,
-      content: param.content || "sensor",
-      column: param.column || "objid,probe,group,device,sensor",
-      usecaption: param.usecaption || "true",
+      ...(param.content && { content: param.content }),
+      ...(param.columns && { columns: param.columns }),
       ...(param.filter_device && { filter_device: param.filter_device }),
       ...(param.filter_type && { filter_type: param.filter_type }),
       ...(param.output && { output: param.output }),
@@ -26,10 +25,10 @@ class connectionPRTG {
       ...(param.count && { count: param.count }),
       ...(param.noraw && { noraw: param.noraw }),
       ...(param.id && { id: param.id }),
+      ...(param.usecaption && { usecaption: param.usecaption }),
       ...(param.filter_user && { filter_user: param.filter_user }),
     };
     // console.log(params);
-    // return(params)
     try {
       const response = await axiosInstance.get(`/api/table.json`, { params });
       // console.log(response.data);
