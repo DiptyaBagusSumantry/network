@@ -6,7 +6,7 @@ const { Json } = require("sequelize/lib/utils");
 class ResponseController {
   static async tableJson(req, res) {
     const data = await connectionPRTG.tableJson(req.query);
-    const { treesize, devices, sensor } = data;
+    const { treesize, devices, sensor, values } = data;
     if (!req.params.type) {
       return res.send("please insert type");
     }
@@ -23,6 +23,13 @@ class ResponseController {
         treesize,
         sensor: JSON.stringify(sensor),
         filter_parentid: req.query.filter_parentid,
+      });
+    }else if (req.params.type == "datavalues") {
+      await Models.ListSensor.create({
+        prtg_version: data["prtg-version"],
+        treesize,
+        values: JSON.stringify(values),
+        sensorId: req.query.id,
       });
     }
     if (data.errorConnection) {

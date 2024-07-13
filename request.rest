@@ -27,7 +27,7 @@ Content-Type: application/json
 
 #type
 #listdevice
-
+# datavalues
 
 ###
 GET http://localhost:5006/table-json/listdevice?http://127.0.0.1/api/table.json?content=devices&&usecaption=true&filter_parentid=2067&columns=objid,device
