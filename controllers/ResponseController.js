@@ -39,7 +39,7 @@ class ResponseController {
   }
   static async detailSensor(req, res) {
     const data = await connectionPRTG.detailSensor(req.query);
-    const{prtgversion, sensordata} = data
+    const { prtgversion, sensordata } = data;
     await Models.DetailSensor.create({
       prtg_version: prtgversion,
       sensordata: JSON.stringify(sensordata),
