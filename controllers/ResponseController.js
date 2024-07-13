@@ -42,7 +42,7 @@ class ResponseController {
     await Models.DetailSensor.create({
       prtg_version: data["prtg-version"],
       sensordata: JSON.stringify(data.sensordata),
-      sensor_id: req.query.id,
+      sensorId: req.query.id,
     });
     if (data.errorConnection) {
       handlerError(res, data);
