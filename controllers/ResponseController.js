@@ -7,16 +7,16 @@ class ResponseController {
   static async tableJson(req, res) {
     const data = await connectionPRTG.tableJson(req.query);
     const { treesize, devices } = data;
-    if (!req.params.type){
-      return res.send("please insert type")
+    if (!req.params.type) {
+      return res.send("please insert type");
     }
-      if (req.params.type == "listdevice")
-        await Models.ListDevice.create({
-          prtgVersion: data["prtg-version"],
-          treesize,
-          devices: JSON.stringify(devices),
-          filterParentid: req.query.filter_parentid,
-        });
+    if (req.params.type == "listdevice")
+      await Models.ListDevice.create({
+        prtg_version: data["prtg-version"],
+        treesize,
+        devices: JSON.stringify(devices),
+        filter_parentid: req.query.filter_parentid,
+      });
 
     if (data.errorConnection) {
       handlerError(res, data);
