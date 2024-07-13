@@ -41,7 +41,7 @@ class ResponseController {
     const data = await connectionPRTG.detailSensor(req.query);
     await Models.DetailSensor.create({
       prtg_version: data["prtg-version"],
-      sensordata: JSON.stringify(sensordata),
+      sensordata: JSON.stringify(data.sensordata),
       sensor_id: req.query.id,
     });
     if (data.errorConnection) {
