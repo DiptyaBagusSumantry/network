@@ -10,7 +10,7 @@ const ResponseController = require("../controllers/ResponseController.js");
 
 router.post("/login", AuthController.Login);
 router.get("/count-dashboard", AuthController.countDashbaord);
-router.get("/table-json", verifyToken, ResponseController.tableJson);
+router.get("/table-json/:type", verifyToken, ResponseController.tableJson);
 router.get("/table-xml", verifyToken, ResponseController.tableXML);
 router.get("/detail-sensor",verifyToken, ResponseController.detailSensor);
 // router.post("/register", AuthController.register);
