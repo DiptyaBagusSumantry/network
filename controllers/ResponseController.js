@@ -18,7 +18,7 @@ class ResponseController {
         filter_parentid: req.query.filter_parentid,
       });
     } else if (req.params.type == "listsensor") {
-      await Models.ListDevice.create({
+      await Models.ListSensor.create({
         prtg_version: data["prtg-version"],
         treesize,
         sensor: JSON.stringify(sensor),
