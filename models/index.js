@@ -5,7 +5,6 @@ const ListDevice = require("./ListDevice.js")
 const ListSensor = require("./ListSensor.js")
 const DetailSensor = require("./DetailSensor.js")
 const DataValues = require("./DataValues.js")
-const Router = require("./RouterModel.js")
 
 const sequelizeInstance = new Sequelize(
   dbConfig.DB,
