@@ -10,13 +10,21 @@ class ResponseController {
     if (!req.params.type) {
       return res.send("please insert type");
     }
-    if (req.params.type == "listdevice")
+    if (req.params.type == "listdevice") {
       await Models.ListDevice.create({
         prtg_version: data["prtg-version"],
         treesize,
         devices: JSON.stringify(devices),
         filter_parentid: req.query.filter_parentid,
       });
+    } else if (req.params.type == "listsensor") {
+      await Models.ListDevice.create({
+        prtg_version: data["prtg-version"],
+        treesize,
+        sensor: JSON.stringify(sensor),
+        filter_parentid: req.query.filter_parentid,
+      });
+    }
 
     if (data.errorConnection) {
       handlerError(res, data);
