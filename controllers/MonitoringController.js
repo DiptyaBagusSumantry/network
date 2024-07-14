@@ -25,6 +25,11 @@ class MonitoringController {
             ssid: deviceName,
             presentaseKekuatanSinyal: "",
             waktu: "",
+            // ssid: deviceName,
+            // ping: 0,
+            // jitter: 0,
+            // waktu: "",
+            // presentaseKekuatanSinyal: "",
           };
         }
 
@@ -44,9 +49,9 @@ class MonitoringController {
             deviceData[deviceName].jitter = pingJitterTime;
           }
         } else if (sensor.sensordata.name === "SNMP System Uptime") {
-          deviceData[deviceName].snmpDateTime =
+          deviceData[deviceName].waktu =
             sensor.sensordata.lastup.split(" ")[0];
-          deviceData[deviceName].snmpUptimeStrength = parseFloat(
+          deviceData[deviceName].presentaseKekuatanSinyal = parseFloat(
             sensor.sensordata.uptime.replace("%", "")
           );
         }
