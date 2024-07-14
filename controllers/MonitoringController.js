@@ -4,7 +4,7 @@ const connectionPRTG = require("../utils/connection");
 
 async function fetchDevices() {
   const data = await connectionPRTG.tableJson(
-    "content=devices}&usecaption=true&filter_parentid=${groupID}&columns=objid,device"
+    "content=devices&usecaption=true&filter_parentid=2067&columns=objid,device"
   );
   console.log(data)
   // const response = await fetch(url);
