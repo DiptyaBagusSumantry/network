@@ -18,11 +18,13 @@ class MonitoringController {
         // Jika device belum ada di dalam objek, tambahkan
         if (!deviceData[deviceName]) {
           deviceData[deviceName] = {
-            device: deviceName,
-            maxPingTime: 0,
-            maxPingJitterTime: 0,
-            snmpDateTime: "",
-            snmpUptimeStrength: "",
+            kecepatanDownload: null,
+            kecepatanUpload: null,
+            ping: 0,
+            jitter: 0,
+            ssid: deviceName,
+            presentaseKekuatanSinyal: "",
+            waktu: "",
           };
         }
 
@@ -31,15 +33,15 @@ class MonitoringController {
           const pingTime = parseFloat(
             sensor.sensordata.lastvalue.split(" ")[0]
           );
-          if (pingTime > deviceData[deviceName].maxPingTime) {
-            deviceData[deviceName].maxPingTime = pingTime;
+          if (pingTime > deviceData[deviceName].ping) {
+            deviceData[deviceName].ping = pingTime;
           }
         } else if (sensor.sensordata.name === "Ping Jitter") {
           const pingJitterTime = parseFloat(
             sensor.sensordata.lastvalue.split(" ")[0]
           );
-          if (pingJitterTime > deviceData[deviceName].maxPingJitterTime) {
-            deviceData[deviceName].maxPingJitterTime = pingJitterTime;
+          if (pingJitterTime > deviceData[deviceName].jitter) {
+            deviceData[deviceName].jitter = pingJitterTime;
           }
         } else if (sensor.sensordata.name === "SNMP System Uptime") {
           deviceData[deviceName].snmpDateTime =
