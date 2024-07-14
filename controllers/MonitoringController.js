@@ -1,21 +1,13 @@
 const Models = require("../models/index.js");
+const { handlerError, handleGet } = require("../helper/HandlerError.js");
 
 class MonitoringController {
   static async getMonitoring(req, res) {
     try {
       const sensorData = await Models.DetailSensor.findAll();
-      // const DataValues = await Models.DataValues.findAll()
-
-      // return res.send(DetailSensor);
-
-      // Menginisialisasi objek untuk menyimpan data yang sudah dikelompokkan berdasarkan device
       const deviceData = {};
-
-      // Loop melalui data sensor untuk mengelompokkan dan menghitung data yang diperlukan
       sensorData.forEach((sensor) => {
         const deviceName = sensor.sensordata.parentdevicename;
-
-        // Jika device belum ada di dalam objek, tambahkan
         if (!deviceData[deviceName]) {
           deviceData[deviceName] = {
             kecepatanDownload: null,
@@ -25,15 +17,8 @@ class MonitoringController {
             ssid: deviceName,
             presentaseKekuatanSinyal: "",
             waktu: "",
-            // ssid: deviceName,
-            // ping: 0,
-            // jitter: 0,
-            // waktu: "",
-            // presentaseKekuatanSinyal: "",
           };
         }
-
-        // Proses data berdasarkan nama sensor
         if (sensor.sensordata.name === "Ping") {
           const pingTime = parseFloat(
             sensor.sensordata.lastvalue.split(" ")[0]
@@ -56,11 +41,9 @@ class MonitoringController {
           );
         }
       });
-
-      // Mengubah objek menjadi array
       const result = Object.values(deviceData);
 
-      console.log(result);
+      handleGet(result)
     } catch (error) {
       handlerError(res, error);
     }
