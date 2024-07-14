@@ -24,7 +24,7 @@ const ListSensor = (sequelizeInstance) => {
           return JSON.parse(rawValue);
       },
       set(value) {
-          this.setDataValue('data', JSON.stringify(value));
+          this.setDataValue('sensor', value);
       }
       },
       filter_parentid: {

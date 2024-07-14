@@ -24,7 +24,7 @@ const DataValues = (sequelizeInstance) => {
           return JSON.parse(rawValue);
       },
       set(value) {
-          this.setDataValue('data', JSON.stringify(value));
+          this.setDataValue('values', value);
       }
       },
       sensorId: {

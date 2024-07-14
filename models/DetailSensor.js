@@ -21,7 +21,7 @@ const DetailSensor = (sequelizeInstance) => {
           return JSON.parse(rawValue);
       },
       set(value) {
-          this.setDataValue('data', JSON.stringify(value));
+          this.setDataValue('sensordata', value);
       }
       },
       sensorId: {
