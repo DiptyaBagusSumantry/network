@@ -27,10 +27,16 @@ class MonitoringController {
   }
   static async getMonitoringLive(req, res) {
     try {
-      const ListDevice = await Models.ListDevice.findAll()
-      const ListSensor = await Models.ListSensor.findAll()
-      const DetailSensor = await Models.DetailSensor.findAll()
-      const DataValues = await Models.DataValues.findAll()
+      const ListDevice = await connectionPRTG.tableJson(
+        "content=devices}&usecaption=true&filter_parentid=${groupID}&columns=objid,device"
+      );
+      const ListSensor = await connectionPRTG.tableJson(
+        "content=sensors}&usecaption=true&filter_parentid=${deviceId}&columns=objid,sensor"
+      );
+      const DetailSensor = await connectionPRTG.detailSensor(
+        "id=${sensorId}&usecaption=true"
+      );
+
       
       return res.send(ListDevice)
 
