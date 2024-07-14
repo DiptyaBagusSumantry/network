@@ -51,3 +51,8 @@ Authorization: Bearer {{token}}
 GET http://localhost:5006/detail-sensor?content=
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+GET http://localhost:5006/monitoring
+Content-Type: application/json
+Authorization: Bearer {{token}}

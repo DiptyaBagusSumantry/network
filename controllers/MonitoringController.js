@@ -8,7 +8,8 @@ class MonitoringController {
       const DetailSensor = await Models.DetailSensor.findAll()
       const DataValues = await Models.DataValues.findAll()
       
-      
+      return res.send(ListDevice)
+
     } catch (error) {
       handlerError(res, error);
     }
