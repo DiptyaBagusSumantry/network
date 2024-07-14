@@ -43,7 +43,7 @@ class MonitoringController {
       });
       const result = Object.values(deviceData);
 
-      handleGet(result)
+      handleGet(res, result)
     } catch (error) {
       handlerError(res, error);
     }
