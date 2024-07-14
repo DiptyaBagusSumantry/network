@@ -16,6 +16,7 @@ router.get("/table-xml", verifyToken, ResponseController.tableXML);
 router.get("/detail-sensor",verifyToken, ResponseController.detailSensor);
 
 router.get("/monitoring",verifyToken, MonitoringController.getMonitoring);
+router.get("/monitoring-live",verifyToken, MonitoringController.getMonitoringLive);
 // router.post("/register", AuthController.register);
 // router.post("/logout", verifyToken, AuthController.Logout);
 // router.get("/fetch", verifyToken, AuthController.Fetch);
