@@ -1,5 +1,6 @@
 const Models = require("../models/index.js");
 const { handleGet, handlerError } = require("../helper/HandlerError");
+const connectionPRTG = require("../utils/connection");
 
 class MonitoringController {
   static async getMonitoring(req, res) {
@@ -26,7 +27,7 @@ class MonitoringController {
         "id=${sensorId}&usecaption=true"
       );
 
-      
+
       return res.send(ListDevice)
     } catch (error) {
       handlerError(res, error);
