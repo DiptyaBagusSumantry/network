@@ -26,6 +26,7 @@ class MonitoringController {
         "id=${sensorId}&usecaption=true"
       );
 
+      
       return res.send(ListDevice)
     } catch (error) {
       handlerError(res, error);
