@@ -39,24 +39,6 @@ class AuthController {
     }
   }
 
-  static async countDashbaord(req, res) {
-    try {
-      // const { username, password, role, fullname, phone, email } = req.body;
-
-      // await Models.User.create({
-      //   username,
-      //   password,
-      //   role,
-      //   fullname,
-      //   phone,
-      //   email,
-      // });
-      // handleCreate(res);
-    } catch (error) {
-      handlerError(res, error);
-    }
-  }
-
   // static async Fetch(req, res) {
   //   try {
   //     const authHeader = req.headers["authorization"];

@@ -12,6 +12,7 @@ class MonitoringController {
           deviceData[deviceName] = {
             kecepatanDownload: null,
             kecepatanUpload: null,
+            objid: sensor.sensordata.parentdeviceid,
             ping: 0,
             jitter: 0,
             ssid: deviceName,

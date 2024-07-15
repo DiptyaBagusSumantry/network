@@ -16,13 +16,14 @@ const DetailSensor = (sequelizeInstance) => {
       },
       sensordata: {
         type: Sequelize.TEXT("long"),
+        allowNull: false,
         get() {
-          const rawValue = this.getDataValue('sensordata');
+          const rawValue = this.getDataValue("sensordata");
           return JSON.parse(rawValue);
-      },
-      set(value) {
-          this.setDataValue('sensordata', value);
-      }
+        },
+        set(value) {
+          this.setDataValue("sensordata", value);
+        },
       },
       sensorId: {
         type: Sequelize.INTEGER,

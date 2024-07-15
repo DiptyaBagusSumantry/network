@@ -22,13 +22,14 @@ const ListDevice = (sequelizeInstance) => {
       },
       devices: {
         type: Sequelize.TEXT("long"),
+        allowNull: false,
         get() {
-            const rawValue = this.getDataValue('devices');
-            return JSON.parse(rawValue);
+          const rawValue = this.getDataValue("devices");
+          return JSON.parse(rawValue);
         },
         set(value) {
-            this.setDataValue('devices', value);
-        }
+          this.setDataValue("devices", value);
+        },
       },
     },
     {

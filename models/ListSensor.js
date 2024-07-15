@@ -19,13 +19,14 @@ const ListSensor = (sequelizeInstance) => {
       },
       sensor: {
         type: Sequelize.TEXT("long"),
+        allowNull: false,
         get() {
-          const rawValue = this.getDataValue('sensor');
+          const rawValue = this.getDataValue("sensor");
           return JSON.parse(rawValue);
-      },
-      set(value) {
-          this.setDataValue('sensor', value);
-      }
+        },
+        set(value) {
+          this.setDataValue("sensor", value);
+        },
       },
       filter_parentid: {
         type: Sequelize.INTEGER,
