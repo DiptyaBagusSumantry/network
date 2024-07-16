@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFhMGZmMzM4LTk3ZjUtNDBjMC1hZjVkLTQ0NjhjNGEwZTQ3OCIsImlhdCI6MTcyMDgzNTg4MCwiZXhwIjoxNzIxMTgxNDgwfQ.oQiZU1i4lMYzkpseh4kPI6v3en-N2oW0JcE_X0w989E
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MzYzM2U1LTRiZjAtNGE3MC04NjkzLTU0NjEyYTQ0NzIwOSIsImlhdCI6MTcyMTE0MDA2OSwiZXhwIjoxNzIxNDg1NjY5fQ.BNln2a0Dl_tMJhx2hpp6kk-IG6881K4Ot8BWG1W8bLQ
 
 //login
 ###
@@ -33,13 +33,13 @@ Authorization: Bearer {{token}}
 
 //Historicdata-csv
 ###
-GET http://localhost:5006/historicdata-csv?id=2081&avg=0&sdate=2023-01-20-00-00-00&edate=2023-01-21-00-00-00
+GET http://localhost:5006/historicdata-csv?id=2069&avg=3600&sdate=2024-07-13-00-00-00&edate=2024-07-14-00-00-00&usecaption=1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 //Historicdata-html
 ###
-GET http://localhost:5006/historicdata-html?id=2081&avg=0&sdate=2023-01-20-00-00-00&edate=2023-01-21-00-00-00
+GET http://localhost:5006/historicdata-html?id=2069&sdate=2024-07-13-08-23-00&edate=2024-07-14-08-23-00&avg=3600&pctavg=300&pctshow=false&pct=95&pctmode=false&hide=NaN
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

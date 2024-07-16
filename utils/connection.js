@@ -91,7 +91,6 @@ class connectionPRTG {
       const response = await axiosInstance.get(`/api/historicdata.csv`, {
         params,
       });
-      // console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error.response.data);
@@ -114,7 +113,7 @@ class connectionPRTG {
       ...(param.hide && { hide: param.hide }),
     };
     try {
-      const response = await axiosInstance.get(`/api/historicdata_html.html`, {
+      const response = await axiosInstance.get(`/historicdata_html.htm`, {
         params,
       });
       // console.log(response.data);

@@ -59,11 +59,11 @@ class ResponseController {
   }
   static async historicDataCSV(req, res) {
     const data = await connectionPRTG.historicDataCSV(req.query);
-    // console.log("controller",data)
     if (data.errorConnection) {
       return handlerError(res, data);
     }
-    handleGet(res, data);
+    // handleGet(res, data);
+    return res.send(data)
   }
   static async historicDataHTML(req, res) {
     const data = await connectionPRTG.historicDataHTML(req.query);
@@ -71,7 +71,8 @@ class ResponseController {
     if (data.errorConnection) {
       return handlerError(res, data);
     }
-    handleGet(res, data);
+    // handleGet(res, data);
+    return res.send(data)
   }
 }
 module.exports = ResponseController;
