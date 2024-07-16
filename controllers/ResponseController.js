@@ -24,7 +24,7 @@ class ResponseController {
         sensor: JSON.stringify(sensor),
         filter_parentid: req.query.filter_parentid,
       });
-    }else if (req.params.type == "datavalues") {
+    } else if (req.params.type == "datavalues") {
       await Models.DataValues.create({
         prtgversion: data["prtg-version"],
         treesize,
@@ -57,11 +57,19 @@ class ResponseController {
     }
     handleGet(res, data);
   }
-  static async monitoring(req, res) {
-    const dataTableJson = await connectionPRTG.tableJson(req.query);
-    const data = await connectionPRTG.detailSensor(req.query);
+  static async historicDataCSV(req, res) {
+    const data = await connectionPRTG.historicDataCSV(req.query);
+    // console.log("controller",data)
     if (data.errorConnection) {
-      handlerError(res, data);
+      return handlerError(res, data);
+    }
+    handleGet(res, data);
+  }
+  static async historicDataHTML(req, res) {
+    const data = await connectionPRTG.historicDataHTML(req.query);
+    // console.log("controller",data)
+    if (data.errorConnection) {
+      return handlerError(res, data);
     }
     handleGet(res, data);
   }

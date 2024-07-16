@@ -22,6 +22,12 @@ router.get("/monitoring", verifyToken, MonitoringController.getMonitoring);
 router.get("/count-dashboard", verifyToken, DashboardController.countDashboard);
 router.get("/list-sensor", verifyToken, ListSensorController.getListSensorById);
 router.get("/akses-point", verifyToken, ListDeviceController.getDevice);
+router.get("/historicdata-csv", verifyToken, ResponseController.historicDataCSV);
+router.get("/historicdata-html", verifyToken, ResponseController.historicDataHTML);
+
+
+
+
 // router.post("/register", AuthController.register);
 // router.post("/logout", verifyToken, AuthController.Logout);
 // router.get("/fetch", verifyToken, AuthController.Fetch);

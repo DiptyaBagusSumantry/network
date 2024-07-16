@@ -36,7 +36,7 @@ class connectionPRTG {
       return response.data;
     } catch (error) {
       console.log(error.response.data);
-      return {errorConnection: error.response.data};
+      return { errorConnection: error.response.data };
     }
   }
   static async tableXML(param) {
@@ -50,7 +50,6 @@ class connectionPRTG {
       ...(param.usecaption && { usecaption: param.usecaption }),
     };
     try {
-      
       const response = await axiosInstance.get(`/api/historicdata.xml`, {
         params,
       });
@@ -69,6 +68,53 @@ class connectionPRTG {
     };
     try {
       const response = await axiosInstance.get(`/api/getsensordetails.json`, {
+        params,
+      });
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error.response.data);
+      return { errorConnection: error.response.data };
+    }
+  }
+  static async historicDataCSV(param) {
+    const params = {
+      apitoken: apiToken,
+      ...(param.content && { content: param.content }),
+      ...(param.id && { id: param.id }),
+      ...(param.avg && { avg: param.avg }),
+      ...(param.sdate && { sdate: param.sdate }),
+      ...(param.edate && { edate: param.edate }),
+      ...(param.usecaption && { usecaption: param.usecaption }),
+    };
+    try {
+      const response = await axiosInstance.get(`/api/historicdata.csv`, {
+        params,
+      });
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error.response.data);
+      return { errorConnection: error.response.data };
+    }
+  }
+  static async historicDataHTML(param) {
+    const params = {
+      apitoken: apiToken,
+      ...(param.content && { content: param.content }),
+      ...(param.id && { id: param.id }),
+      ...(param.avg && { avg: param.avg }),
+      ...(param.sdate && { sdate: param.sdate }),
+      ...(param.edate && { edate: param.edate }),
+      ...(param.usecaption && { usecaption: param.usecaption }),
+      ...(param.pctavg && { pctavg: param.pctavg }),
+      ...(param.pctshow && { pctshow: param.pctshow }),
+      ...(param.pct && { pct: param.pct }),
+      ...(param.pctmode && { pctmode: param.pctmode }),
+      ...(param.hide && { hide: param.hide }),
+    };
+    try {
+      const response = await axiosInstance.get(`/api/historicdata_html.html`, {
         params,
       });
       // console.log(response.data);

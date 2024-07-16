@@ -30,6 +30,19 @@ GET http://localhost:5006/akses-point
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
+
+//Historicdata-csv
+###
+GET http://localhost:5006/historicdata-csv?id=2081&avg=0&sdate=2023-01-20-00-00-00&edate=2023-01-21-00-00-00
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+//Historicdata-html
+###
+GET http://localhost:5006/historicdata-html?id=2081&avg=0&sdate=2023-01-20-00-00-00&edate=2023-01-21-00-00-00
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
 //table JSON
 //QUERY ATAU PARAMS
 # content
