@@ -21,7 +21,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:5006/list-sensor?id=2068
+GET http://localhost:5006/list-sensor?id=2139
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

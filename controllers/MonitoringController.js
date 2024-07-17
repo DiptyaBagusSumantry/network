@@ -6,12 +6,14 @@ class MonitoringController {
     try {
       const sensorData = await Models.DetailSensor.findAll();
       const deviceData = {};
-      sensorData.forEach((sensor) => {
+
+      for (const sensor of sensorData) {
         const deviceName = sensor.sensordata.parentdevicename;
+
         if (!deviceData[deviceName]) {
           deviceData[deviceName] = {
-            kecepatanDownload: null,
-            kecepatanUpload: null,
+            kecepatanDownload: 0,
+            kecepatanUpload: 0,
             objid: sensor.sensordata.parentdeviceid,
             ping: 0,
             jitter: 0,
@@ -20,6 +22,7 @@ class MonitoringController {
             waktu: "",
           };
         }
+
         if (sensor.sensordata.name === "Ping") {
           const pingTime = parseFloat(
             sensor.sensordata.lastvalue.split(" ")[0]
@@ -34,17 +37,31 @@ class MonitoringController {
           if (pingJitterTime > deviceData[deviceName].jitter) {
             deviceData[deviceName].jitter = pingJitterTime;
           }
-        } else if (sensor.sensordata.name === "SNMP System Uptime" || sensor.sensordata.name === "(004) GigabitEthernet0 Traffic") {
-          deviceData[deviceName].waktu =
-            sensor.sensordata.lastup.split(" ")[0];
-          deviceData[deviceName].presentaseKekuatanSinyal = parseFloat(
-            sensor.sensordata.uptime.replace("%", "")
-          );
-        }
-      });
-      const result = Object.values(deviceData);
+        } else if (
+          sensor.sensordata.name === "SNMP System Uptime" ||
+          sensor.sensordata.name === "(004) GigabitEthernet0 Traffic"
+        ) {
+          const SNMP = await Models.DataValues.findOne({
+            where: {
+              sensorId: sensor.sensorId,
+            },
+          });
 
-      handleGet(res, result)
+          if (SNMP) {
+            const data = JSON.parse(SNMP.dataValues.values);
+            deviceData[deviceName].waktu = data.datetime;
+            deviceData[deviceName].kecepatanUpload = data["Traffic In (Speed)"];
+            deviceData[deviceName].kecepatanDownload =
+              data["Traffic Out (Speed)"];
+            deviceData[deviceName].presentaseKekuatanSinyal = parseFloat(
+              sensor.sensordata.uptime.replace("%", "")
+            );
+          }
+        }
+      }
+
+      const result = Object.values(deviceData);
+      handleGet(res, result);
     } catch (error) {
       handlerError(res, error);
     }

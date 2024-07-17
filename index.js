@@ -48,7 +48,7 @@ app.use(router);
 
 main(["2138", "2148", "2152"]);
 setInterval(() => {
-  main(groupIds);
+  main(["2138", "2148", "2152"]);
 }, 300000); //milidetik
 
 app.listen(process.env.PORT || 5006, () => {
