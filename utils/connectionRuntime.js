@@ -101,51 +101,51 @@ async function truncateTables() {
 async function main(groupIds) {
   try {
     await truncateTables();
-    // for (const groupId of groupIds) {
-    //   const devices = await getDevicesInGroup(groupId);
-    //   // console.log("Devices for Group ${groupId}:", devices);
-    //   await Models.ListDevice.create({
-    //     prtg_version: devices["prtg-version"],
-    //     treesize: devices.treesize,
-    //     devices: JSON.stringify(devices.devices),
-    //     filter_parentid: groupIds,
-    //   });
+    for (const groupId of groupIds) {
+      const devices = await getDevicesInGroup(groupId);
+      // console.log("Devices for Group ${groupId}:", devices);
+      await Models.ListDevice.create({
+        prtg_version: devices["prtg-version"],
+        treesize: devices.treesize,
+        devices: JSON.stringify(devices.devices),
+        filter_parentid: groupIds,
+      });
 
-    //   for (const device of devices) {
-    //     const deviceId = device.objid;
+      for (const device of devices) {
+        const deviceId = device.objid;
 
-    //     const sensors = await getSensorsForDevice(deviceId);
-    //     // console.log("Sensors for Device ${deviceId}:", sensors);
-    //     await Models.ListSensor.create({
-    //       prtg_version: sensors["prtg-version"],
-    //       treesize: sensors.treesize,
-    //       sensor: JSON.stringify(sensors.sensor),
-    //       filter_parentid: deviceId,
-    //     });
+        const sensors = await getSensorsForDevice(deviceId);
+        // console.log("Sensors for Device ${deviceId}:", sensors);
+        await Models.ListSensor.create({
+          prtg_version: sensors["prtg-version"],
+          treesize: sensors.treesize,
+          sensor: JSON.stringify(sensors.sensor),
+          filter_parentid: deviceId,
+        });
 
-    //     for (const sensor of sensors.sensor) {
-    //       const sensorId = sensor.objid;
+        for (const sensor of sensors.sensor) {
+          const sensorId = sensor.objid;
 
-    //       const sensorDetails = await getSensorDetails(sensorId);
-    //       // console.log("Details for Sensor ${sensorId}:", sensorDetails);
-    //       await Models.DetailSensor.create({
-    //         prtg_version: sensorDetails.prtgversion,
-    //         sensordata: JSON.stringify(sensorDetails.sensordata),
-    //         sensorId,
-    //       });
+          const sensorDetails = await getSensorDetails(sensorId);
+          // console.log("Details for Sensor ${sensorId}:", sensorDetails);
+          await Models.DetailSensor.create({
+            prtg_version: sensorDetails.prtgversion,
+            sensordata: JSON.stringify(sensorDetails.sensordata),
+            sensorId,
+          });
 
-    //       const sensorSpeeds = await getSensorSpeeds(sensorId);
-    //       // console.log("Speeds for Sensor ${sensorId}:", sensorSpeeds.values.length);
-    //       const lastValue = sensorSpeeds.values[sensorSpeeds.values.length - 1];
-    //       await Models.DataValues.create({
-    //         prtg_version: sensorSpeeds.prtgversion,
-    //         treesize: sensorSpeeds.treesize,
-    //         values: JSON.stringify(lastValue),
-    //         sensorId,
-    //       });
-    //     }
-    //   }
-    // }
+          const sensorSpeeds = await getSensorSpeeds(sensorId);
+          // console.log("Speeds for Sensor ${sensorId}:", sensorSpeeds.values.length);
+          const lastValue = sensorSpeeds.values[sensorSpeeds.values.length - 1];
+          await Models.DataValues.create({
+            prtg_version: sensorSpeeds.prtgversion,
+            treesize: sensorSpeeds.treesize,
+            values: JSON.stringify(lastValue),
+            sensorId,
+          });
+        }
+      }
+    }
   } catch (error) {
     console.error("Main process error:", error);
   }
