@@ -46,7 +46,7 @@ app.use(
 
 app.use(router);
 
-main([process.env.GROUP_ID]);
+main(["2138", "2148", "2152"]);
 setInterval(() => {
   main(groupIds);
 }, 300000); //milidetik

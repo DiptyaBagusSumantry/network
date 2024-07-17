@@ -108,7 +108,7 @@ async function main(groupIds) {
         prtg_version: devices["prtg-version"],
         treesize: devices.treesize,
         devices: JSON.stringify(devices.devices),
-        filter_parentid: groupIds,
+        filter_parentid: groupId,
       });
 
       for (const device of devices.devices) {
