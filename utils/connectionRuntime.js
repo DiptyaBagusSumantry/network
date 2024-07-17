@@ -96,5 +96,5 @@ async function main(groupIds) {
   }
 }
 
-const groupIds = ["group1", "group2", "group3"];
+const groupIds = ["2138", "2148", "2152"];
 main(groupIds);
