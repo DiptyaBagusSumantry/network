@@ -6,7 +6,7 @@ const router = require("./routes/index.js");
 const Models = require("./models/index");
 const cookieParser = require("cookie-parser");
 const { createAdmin } = require("./seeders/AdminSeeders.js");
-const path = require("path");
+const { main } = require("./utils/connectionRuntime.js");
 
 // //Insialisasi ke Database
 // Models.sequelizeInstance
@@ -34,14 +34,6 @@ app.get("/", (req, res) => {
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "10mb" }));
-app.use(
-  "/assets/images/laporan",
-  express.static(path.join(__dirname, "assets/images/laporan"))
-);
-app.use(
-  "/assets/images/artikel",
-  express.static(path.join(__dirname, "assets/images/artikel"))
-);
 
 app.use(
   cors({
@@ -53,6 +45,11 @@ app.use(
 );
 
 app.use(router);
+
+main([process.env.GROUP_ID]);
+setInterval(() => {
+  main(groupIds);
+}, 300000); //milidetik
 
 app.listen(process.env.PORT || 5006, () => {
   console.log("Server running at port 5006");

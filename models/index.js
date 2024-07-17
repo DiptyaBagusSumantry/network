@@ -31,17 +31,17 @@ db.ListSensor = ListSensor(sequelizeInstance);
 db.DetailSensor = DetailSensor(sequelizeInstance);
 db.DataValues = DataValues(sequelizeInstance);
 
-// History Patient - Patient
-db.ListDevice.hasMany(db.ListSensor, {
-  foreignKey: {
-    type: Sequelize.UUID,
-    allowNull: true,
-  },
-});
+// // History Patient - Patient
+// db.ListDevice.hasMany(db.ListSensor, {
+//   foreignKey: {
+//     type: Sequelize.UUID,
+//     allowNull: true,
+//   },
+// });
 
-db.ListSensor.belongsTo(db.ListDevice, {
-  targetKey: "id",
-});
+// db.ListSensor.belongsTo(db.ListDevice, {
+//   targetKey: "id",
+// });
 
 // // Transaction - Patient
 // db.Patient.hasMany(db.Transaction, {

@@ -34,7 +34,6 @@ const ListDevice = (sequelizeInstance) => {
     },
     {
       freezeTableName: true,
-      paranoid: true,
       underscored: true,
     }
   );

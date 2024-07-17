@@ -31,7 +31,6 @@ const DetailSensor = (sequelizeInstance) => {
     },
     {
       freezeTableName: true,
-      paranoid: true,
       underscored: true,
     }
   );

@@ -34,7 +34,6 @@ const ListSensor = (sequelizeInstance) => {
     },
     {
       freezeTableName: true,
-      paranoid: true,
       underscored: true,
     }
   );

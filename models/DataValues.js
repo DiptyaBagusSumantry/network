@@ -33,7 +33,6 @@ const DataValues = (sequelizeInstance) => {
     },
     {
       freezeTableName: true,
-      paranoid: true,
       underscored: true,
     }
   );
