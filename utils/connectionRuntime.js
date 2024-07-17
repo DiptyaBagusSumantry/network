@@ -65,29 +65,29 @@ async function getSensorDetails(sensorId) {
 
 async function main(groupIds) {
   try {
-    const allDevices = [];
+    // const allDevices = [];
     for (const groupId of groupIds) {
       const devices = await getDevicesInGroup(groupId);
       console.log("Devices for Group ${groupId}:", devices);
 
-      allDevices.push(devices);
+      // allDevices.push(devices);
 
-      for (const device of devices) {
-        const deviceId = device.deviceId;
+      // for (const device of devices) {
+      //   const deviceId = device.objid;
 
-        const sensors = await getSensorsForDevice(deviceId);
-        console.log("Sensors for Device ${deviceId}:", sensors);
+      //   const sensors = await getSensorsForDevice(deviceId);
+      //   console.log("Sensors for Device ${deviceId}:", sensors);
 
-        for (const sensor of sensors) {
-          const sensorId = sensor.sensorId;
+      //   for (const sensor of sensors) {
+      //     const sensorId = sensor.sensorId;
 
-          const sensorDetails = await getSensorDetails(sensorId);
-          console.log("Details for Sensor ${sensorId}:", sensorDetails);
+      //     const sensorDetails = await getSensorDetails(sensorId);
+      //     console.log("Details for Sensor ${sensorId}:", sensorDetails);
 
-          const sensorSpeeds = await getSensorSpeeds(sensorId);
-          console.log("Speeds for Sensor ${sensorId}:", sensorSpeeds);
-        }
-      }
+      //     const sensorSpeeds = await getSensorSpeeds(sensorId);
+      //     console.log("Speeds for Sensor ${sensorId}:", sensorSpeeds);
+      //   }
+      // }
     }
 
     console.log("All Devices:", allDevices);
