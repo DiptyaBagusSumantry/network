@@ -34,7 +34,7 @@ class MonitoringController {
           if (pingJitterTime > deviceData[deviceName].jitter) {
             deviceData[deviceName].jitter = pingJitterTime;
           }
-        } else if (sensor.sensordata.name === "SNMP System Uptime" || sensor.sensordata.name === "(004) GigabitEthernet0 Traffic) {
+        } else if (sensor.sensordata.name === "SNMP System Uptime" || sensor.sensordata.name === "(004) GigabitEthernet0 Traffic") {
           deviceData[deviceName].waktu =
             sensor.sensordata.lastup.split(" ")[0];
           deviceData[deviceName].presentaseKekuatanSinyal = parseFloat(
