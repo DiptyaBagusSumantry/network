@@ -111,7 +111,7 @@ async function main(groupIds) {
         filter_parentid: groupIds,
       });
 
-      for (const device of devices) {
+      for (const device of devices.devices) {
         const deviceId = device.objid;
 
         const sensors = await getSensorsForDevice(deviceId);
