@@ -30,6 +30,11 @@ GET http://localhost:5006/akses-point
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
+###
+GET http://localhost:5006/list-group-id
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
 
 //Historicdata-csv
 ###

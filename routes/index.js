@@ -41,6 +41,11 @@ router.get(
   verifyToken,
   ResponseController.getSVG
 );
+router.get(
+  "/list-group-id",
+  verifyToken,
+  ListDeviceController.getGroupId
+);
 
 // router.post("/register", AuthController.register);
 // router.post("/logout", verifyToken, AuthController.Logout);

@@ -16,6 +16,17 @@ class ListDeviceController {
       handlerError(res, error);
     }
   }
+  static async getGroupId(req, res) {
+    try {
+      await Models.ListDevice.findAll({ attributes: ["filter_parentid"] }).then(
+        (data) => {
+          handleGet(res, data);
+        }
+      );
+    } catch (error) {
+      handlerError(res, error);
+    }
+  }
 }
 
 module.exports = ListDeviceController;
