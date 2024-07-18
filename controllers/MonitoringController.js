@@ -54,7 +54,6 @@ class MonitoringController {
           });
           if (SNMP) {
             const data = JSON.parse(SNMP.dataValues.values);
-            console.log(data)
             deviceData[deviceName].waktu = data.datetime;
             deviceData[deviceName].kecepatanUpload = data["Traffic In (Speed)"];
             deviceData[deviceName].kecepatanDownload =
