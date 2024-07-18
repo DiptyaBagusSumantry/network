@@ -126,6 +126,8 @@ class connectionPRTG {
   static async getSVG(param) {
     const params = {
       apitoken: apiToken,
+      width: 900,
+      height: 900,
       ...(param.graphid && { graphid: param.graphid }),
       ...(param.id && { id: param.id }),
       ...(param.graphstyling && { graphstyling: param.graphstyling }),
