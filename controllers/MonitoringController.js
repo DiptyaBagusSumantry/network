@@ -25,6 +25,7 @@ class MonitoringController {
             ssid: deviceName,
             presentaseKekuatanSinyal: "",
             waktu: "",
+            idSNMP: ""
           };
         }
 
@@ -51,13 +52,14 @@ class MonitoringController {
               sensorId: sensor.sensorId,
             },
           });
-
           if (SNMP) {
             const data = JSON.parse(SNMP.dataValues.values);
+            console.log(data)
             deviceData[deviceName].waktu = data.datetime;
             deviceData[deviceName].kecepatanUpload = data["Traffic In (Speed)"];
             deviceData[deviceName].kecepatanDownload =
               data["Traffic Out (Speed)"];
+            deviceData[deviceName].idSNMP = sensor.sensorId;
             deviceData[deviceName].presentaseKekuatanSinyal = parseFloat(
               sensor.sensordata.uptime.replace("%", "")
             );
