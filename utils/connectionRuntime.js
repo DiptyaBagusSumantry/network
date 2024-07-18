@@ -132,6 +132,7 @@ async function main(groupIds) {
             prtg_version: sensorDetails.prtgversion,
             sensordata: JSON.stringify(sensorDetails.sensordata),
             sensorId,
+            deviceId: groupId,
           });
 
           const sensorSpeeds = await getSensorSpeeds(sensorId);

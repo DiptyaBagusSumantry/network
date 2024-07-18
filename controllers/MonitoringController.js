@@ -4,7 +4,12 @@ const { handlerError, handleGet } = require("../helper/HandlerError.js");
 class MonitoringController {
   static async getMonitoring(req, res) {
     try {
-      const sensorData = await Models.DetailSensor.findAll();
+      const sensorData = await Models.DetailSensor.findAll({
+        where: {
+          deviceId: req.params.deviceId,
+        },
+      });
+
       const deviceData = {};
 
       for (const sensor of sensorData) {

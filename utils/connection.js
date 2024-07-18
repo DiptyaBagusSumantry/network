@@ -123,6 +123,24 @@ class connectionPRTG {
       return { errorConnection: error.response.data };
     }
   }
+  static async getSVG(param) {
+    const params = {
+      apitoken: apiToken,
+      ...(param.graphid && { graphid: param.graphid }),
+      ...(param.id && { id: param.id }),
+      ...(param.graphstyling && { graphstyling: param.graphstyling }),
+    };
+    try {
+      const response = await axiosInstance.get(`/chart.svg`, {
+        params,
+      });
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error.response.data);
+      return { errorConnection: error.response.data };
+    }
+  }
 }
 
 module.exports = connectionPRTG;

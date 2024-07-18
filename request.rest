@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5006/monitoring
+GET http://localhost:5006/monitoring/2148
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -40,6 +40,12 @@ Authorization: Bearer {{token}}
 //Historicdata-html
 ###
 GET http://localhost:5006/historicdata-html?id=2069&sdate=2024-07-13-08-23-00&edate=2024-07-14-08-23-00&avg=3600&pctavg=300&pctshow=false&pct=95&pctmode=false&hide=NaN
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+//GET SVG
+###
+GET http://localhost:5006/get-svg?type=graph&graphid=0&id=2069&graphstyling=showLegend%3D%271%27+baseFontSize%3D%275%27 
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

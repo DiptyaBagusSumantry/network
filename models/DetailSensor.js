@@ -28,6 +28,9 @@ const DetailSensor = (sequelizeInstance) => {
       sensorId: {
         type: Sequelize.INTEGER,
       },
+      deviceId: {
+        type: Sequelize.INTEGER,
+      },
     },
     {
       freezeTableName: true,

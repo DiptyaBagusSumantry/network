@@ -74,5 +74,14 @@ class ResponseController {
     // handleGet(res, data);
     return res.send(data)
   }
+  static async getSVG(req, res) {
+    const data = await connectionPRTG.getSVG(req.query);
+    // console.log("controller",data)
+    if (data.errorConnection) {
+      return handlerError(res, data);
+    }
+    // handleGet(res, data);
+    return res.send(data)
+  }
 }
 module.exports = ResponseController;
