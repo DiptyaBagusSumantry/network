@@ -63,7 +63,7 @@ class ResponseController {
       return handlerError(res, data);
     }
     // handleGet(res, data);
-    return res.send(data)
+    return res.send(data);
   }
   static async historicDataHTML(req, res) {
     const data = await connectionPRTG.historicDataHTML(req.query);
@@ -72,17 +72,15 @@ class ResponseController {
       return handlerError(res, data);
     }
     // handleGet(res, data);
-    return res.send(data)
+    return res.send(data);
   }
   static async getSVG(req, res) {
     await Models.DetailSensor.findOne({
       where: {
-        sensor_id: req.query.id
+        sensor_id: req.query.id,
       },
-      attributes: ['svg']
-    }).then(data=>[
-      handleGet(res, data.datavalues.svg)
-    ])
+      attributes: ["svg"],
+    }).then((data) => [res.send(JSON.parse(data.svg))]);
   }
 }
 module.exports = ResponseController;
