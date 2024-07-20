@@ -80,7 +80,7 @@ class ResponseController {
         sensor_id: req.query.id,
       },
       attributes: ["svg"],
-    }).then((data) => [res.send(JSON.parse(data.svg))]);
+    }).then((data) => res.send(JSON.parse(data.svg)));
   }
 }
 module.exports = ResponseController;
