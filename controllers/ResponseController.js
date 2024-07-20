@@ -80,7 +80,13 @@ class ResponseController {
         sensor_id: req.query.id,
       },
       attributes: ["svg"],
-    }).then((data) => res.send(JSON.parse(data.svg)));
+      raw: true,
+    }).then((data) => {
+      if (!data) {
+        return res.send(" Tidak ada data sensor ");
+      }
+      res.send(JSON.parse(data.svg));
+    });
   }
 }
 module.exports = ResponseController;

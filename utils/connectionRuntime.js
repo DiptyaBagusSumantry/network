@@ -101,12 +101,12 @@ async function truncateTables() {
 async function getSVG(sensorId) {
   const params = {
     apitoken: apiToken,
-    type: 'graph',
+    type: "graph",
     id: sensorId,
     graphid: 0,
     graphstyling: "showLegend%3D%271%27+baseFontSize%3D%275%27",
-    // width: 900,
-    // height: 900,
+    width: 850,
+    height: 270,
   };
   try {
     const response = await axiosInstance.get(`/chart.svg`, {
