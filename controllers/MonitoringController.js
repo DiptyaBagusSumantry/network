@@ -1,6 +1,16 @@
 const Models = require("../models/index.js");
 const { handlerError, handleGet } = require("../helper/HandlerError.js");
 
+//Fungsi untuk mengambil data Values dari detail sensor
+async function getDataValues(sensorId) {
+  const data = await Models.DataValues.findOne({
+    where: {
+      sensorId: sensorId,
+    },
+  });
+  return data;
+}
+
 class MonitoringController {
   static async getMonitoring(req, res) {
     try {
@@ -25,11 +35,17 @@ class MonitoringController {
             ssid: deviceName,
             presentaseKekuatanSinyal: "",
             waktu: "",
-            idSNMP: ""
+            idSNMP: "",
+            idPing: "",
+            idJitter: "",
           };
         }
 
         if (sensor.sensordata.name === "Ping") {
+          const SNMP = await getDataValues(sensor.sensorId);
+          const data = JSON.parse(SNMP.dataValues.values);
+          deviceData[deviceName].waktu = data.datetime;
+          deviceData[deviceName].idPing = sensor.sensorId;
           const pingTime = parseFloat(
             sensor.sensordata.lastvalue.split(" ")[0]
           );
@@ -37,6 +53,7 @@ class MonitoringController {
             deviceData[deviceName].ping = pingTime;
           }
         } else if (sensor.sensordata.name === "Ping Jitter") {
+          deviceData[deviceName].idJitter = sensor.sensorId;
           const pingJitterTime = parseFloat(
             sensor.sensordata.lastvalue.split(" ")[0]
           );
@@ -45,16 +62,12 @@ class MonitoringController {
           }
         } else if (
           sensor.sensordata.name === "SNMP System Uptime" ||
-          sensor.sensordata.name === "(004) GigabitEthernet0 Traffic"
+          sensor.sensordata.name === "(004) GigabitEthernet0 Traffic" ||
+          sensor.sensordata.name === "(001) GigabitEthernet 0/1 Traffic"
         ) {
-          const SNMP = await Models.DataValues.findOne({
-            where: {
-              sensorId: sensor.sensorId,
-            },
-          });
+          const SNMP = await getDataValues(sensor.sensorId);
           if (SNMP) {
             const data = JSON.parse(SNMP.dataValues.values);
-            deviceData[deviceName].waktu = data.datetime;
             deviceData[deviceName].kecepatanUpload = data["Traffic In (Speed)"];
             deviceData[deviceName].kecepatanDownload =
               data["Traffic Out (Speed)"];
