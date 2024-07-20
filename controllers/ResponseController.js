@@ -77,7 +77,7 @@ class ResponseController {
   static async getSVG(req, res) {
     await Models.DetailSensor.findOne({
       where: {
-        sensorId: req.params.id
+        sensor_id: req.params.id
       },
       attributes: ['svg']
     }).then(data=>[
