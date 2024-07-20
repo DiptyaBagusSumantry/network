@@ -98,6 +98,27 @@ async function truncateTables() {
   }
 }
 
+async function getSVG(sensorId) {
+  const params = {
+    apitoken: apiToken,
+    id: sensorId,
+    graphid: 0,
+    graphstyling: "showLegend%3D%271%27+baseFontSize%3D%275%27",
+    // width: 900,
+    // height: 900,
+  };
+  try {
+    const response = await axiosInstance.get(`/chart.svg`, {
+      params,
+    });
+    console.log(response);
+    // return response.data;
+  } catch (error) {
+    console.log(error.response.data);
+    return { errorConnection: error.response.data };
+  }
+}
+
 async function main(groupIds) {
   try {
     await truncateTables();
@@ -125,7 +146,7 @@ async function main(groupIds) {
 
         for (const sensor of sensors.sensor) {
           const sensorId = sensor.objid;
-
+          const svg = await getSVG(sensorId);
           const sensorDetails = await getSensorDetails(sensorId);
           // console.log("Details for Sensor ${sensorId}:", sensorDetails);
           await Models.DetailSensor.create({
@@ -133,6 +154,7 @@ async function main(groupIds) {
             sensordata: JSON.stringify(sensorDetails.sensordata),
             sensorId,
             deviceId: groupId,
+            svg
           });
 
           const sensorSpeeds = await getSensorSpeeds(sensorId);

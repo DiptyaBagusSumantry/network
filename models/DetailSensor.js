@@ -25,6 +25,9 @@ const DetailSensor = (sequelizeInstance) => {
           this.setDataValue("sensordata", value);
         },
       },
+      svg: {
+        type: Sequelize.TEXT("long"),
+      },
       sensorId: {
         type: Sequelize.INTEGER,
       },
