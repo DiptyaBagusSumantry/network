@@ -11,9 +11,12 @@ async function getDataValues(sensorId) {
   return data;
 }
 
+//Fungsi Class
 class MonitoringController {
   static async getMonitoring(req, res) {
     try {
+      //Mengambil data dari table Detail Sensor dengan groupId
+      // Menyimpan data di variabel sensorData dalam bentuk array
       const sensorData = await Models.DetailSensor.findAll({
         where: {
           deviceId: req.params.deviceId,
@@ -22,9 +25,14 @@ class MonitoringController {
 
       const deviceData = {};
 
+      //Melakukan perulangan data pada sensorData dan diambi per index atau per array
+      //data disimpan di variabel sensor
       for (const sensor of sensorData) {
+        //mengambil nama device
         const deviceName = sensor.sensordata.parentdevicename;
 
+        //jika tidak ada data di deviceData dengan deviceName
+        //data ditambahkan pada variabel deviceData
         if (!deviceData[deviceName]) {
           deviceData[deviceName] = {
             kecepatanDownload: 0,
@@ -40,7 +48,7 @@ class MonitoringController {
             idJitter: "",
           };
         }
-
+        //jika sensor ping
         if (sensor.sensordata.name === "Ping") {
           const SNMP = await getDataValues(sensor.sensorId);
           const data = JSON.parse(SNMP.dataValues.values);
@@ -52,7 +60,8 @@ class MonitoringController {
           if (pingTime > deviceData[deviceName].ping) {
             deviceData[deviceName].ping = pingTime;
           }
-        } else if (sensor.sensordata.name === "Ping Jitter") {
+        } else if (sensor.sensordata.name === "Ping Jitter") { 
+          //jika sensor ping jitter
           deviceData[deviceName].idJitter = sensor.sensorId;
           const pingJitterTime = parseFloat(
             sensor.sensordata.lastvalue.split(" ")[0]
@@ -65,6 +74,7 @@ class MonitoringController {
           sensor.sensordata.name === "(004) GigabitEthernet0 Traffic" ||
           sensor.sensordata.name === "(001) GigabitEthernet 0/1 Traffic"
         ) {
+          //jika sensor SNMP
           const SNMP = await getDataValues(sensor.sensorId);
           if (SNMP) {
             const data = JSON.parse(SNMP.dataValues.values);
@@ -79,6 +89,7 @@ class MonitoringController {
         }
       }
 
+      //mengembalikan data dalam bentuk object
       const result = Object.values(deviceData);
       handleGet(res, result);
     } catch (error) {
