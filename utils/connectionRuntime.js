@@ -101,6 +101,7 @@ async function truncateTables() {
 async function getSVG(sensorId) {
   const params = {
     apitoken: apiToken,
+    type: graph,
     id: sensorId,
     graphid: 0,
     graphstyling: "showLegend%3D%271%27+baseFontSize%3D%275%27",
@@ -111,8 +112,7 @@ async function getSVG(sensorId) {
     const response = await axiosInstance.get(`/chart.svg`, {
       params,
     });
-    console.log(response);
-    // return response.data;
+    return response.data;
   } catch (error) {
     console.log(error.response.data);
     return { errorConnection: error.response.data };
@@ -154,7 +154,7 @@ async function main(groupIds) {
             sensordata: JSON.stringify(sensorDetails.sensordata),
             sensorId,
             deviceId: groupId,
-            svg
+            svg: JSON.stringify(svg),
           });
 
           const sensorSpeeds = await getSensorSpeeds(sensorId);

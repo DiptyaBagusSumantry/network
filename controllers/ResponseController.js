@@ -75,13 +75,14 @@ class ResponseController {
     return res.send(data)
   }
   static async getSVG(req, res) {
-    const data = await connectionPRTG.getSVG(req.query);
-    // console.log("controller",data)
-    if (data.errorConnection) {
-      return handlerError(res, data);
-    }
-    // handleGet(res, data);
-    return res.send(data)
+    await Models.DetailSensor.findOne({
+      where: {
+        sensorId: req.params.id
+      },
+      attributes: ['svg']
+    }).then(data=>[
+      handleGet(res, data.datavalues.svg)
+    ])
   }
 }
 module.exports = ResponseController;

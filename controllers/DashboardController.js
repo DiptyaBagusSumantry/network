@@ -10,16 +10,24 @@ class DashboardController {
 
       await Models.ListDevice.findAll().then((data) => {
         data.forEach((item) => {
-            const parse = JSON.parse(item.dataValues.devices);
-            countRouter += parse.length;
+          const parse = JSON.parse(item.dataValues.devices);
+          countRouter += parse.length;
         });
- 
       });
 
       handleGet(res, { countRouter, countAksesPoin, countUserTerhubung });
     } catch (error) {
       handlerError(res, error);
     }
+  }
+  static async getSVG(req, res) {
+    const data = await connectionPRTG.getSVG(req.query);
+    // console.log("controller",data)
+    if (data.errorConnection) {
+      return handlerError(res, data);
+    }
+    // handleGet(res, data);
+    return res.send(data);
   }
 }
 
