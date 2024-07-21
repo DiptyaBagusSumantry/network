@@ -58,21 +58,32 @@ class ResponseController {
     handleGet(res, data);
   }
   static async historicDataCSV(req, res) {
-    const data = await connectionPRTG.historicDataCSV(req.query);
-    if (data.errorConnection) {
-      return handlerError(res, data);
-    }
-    // handleGet(res, data);
-    return res.send(data);
+    await Models.DetailSensor.findOne({
+      where: {
+        sensor_id: req.query.id,
+      },
+      attributes: ["csv"],
+      raw: true,
+    }).then((data) => {
+      if (!data) {
+        return res.send(" Tidak ada data sensor ");
+      }
+      res.send(JSON.parse(data.csv));
+    });
   }
   static async historicDataHTML(req, res) {
-    const data = await connectionPRTG.historicDataHTML(req.query);
-    // console.log("controller",data)
-    if (data.errorConnection) {
-      return handlerError(res, data);
-    }
-    // handleGet(res, data);
-    return res.send(data);
+    await Models.DetailSensor.findOne({
+      where: {
+        sensor_id: req.query.id,
+      },
+      attributes: ["html"],
+      raw: true,
+    }).then((data) => {
+      if (!data) {
+        return res.send(" Tidak ada data sensor ");
+      }
+      res.send(JSON.parse(data.html));
+    });
   }
   static async getSVG(req, res) {
     await Models.DetailSensor.findOne({

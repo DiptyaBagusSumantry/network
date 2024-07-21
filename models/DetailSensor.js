@@ -28,6 +28,12 @@ const DetailSensor = (sequelizeInstance) => {
       svg: {
         type: Sequelize.TEXT("long"),
       },
+      csv: {
+        type: Sequelize.TEXT("long"),
+      },
+      html: {
+        type: Sequelize.TEXT("long"),
+      },
       sensorId: {
         type: Sequelize.INTEGER,
       },

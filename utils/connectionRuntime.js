@@ -1,9 +1,10 @@
 const axios = require("axios");
 require("dotenv").config();
 const Models = require("../models/index.js");
+const moment = require("moment");
 
 const axiosInstance = axios.create({
-    baseURL: process.env.CONNECTION_URL,
+  baseURL: process.env.CONNECTION_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -119,9 +120,35 @@ async function getSVG(sensorId) {
   }
 }
 
+async function getCsv(sensorId, sdate, edate) {
+  const params = {
+    apitoken: apiToken,
+    id: sensorId,
+    avg: 3600,
+    sdate,
+    edate,
+    usecaption: 1,
+  };
+  try {
+    const response = await axiosInstance.get(`/api/historicdata.csv`, {
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error.response.data);
+    return { errorConnection: error.response.data };
+  }
+}
+
 async function main(groupIds) {
   try {
+    const sdate = moment()
+      .subtract(7, "days")
+      .format("YYYY-MM-DD-00-00-00");
+    const edate = moment().format("YYYY-MM-DD-00-00-00");
+
     await truncateTables();
+    
     for (const groupId of groupIds) {
       const devices = await getDevicesInGroup(groupId);
       // console.log("Devices for Group ${groupId}:", devices);
@@ -146,7 +173,10 @@ async function main(groupIds) {
 
         for (const sensor of sensors.sensor) {
           const sensorId = sensor.objid;
+
           const svg = await getSVG(sensorId);
+          const csv = await getCsv(sensorId, sdate, edate);
+
           const sensorDetails = await getSensorDetails(sensorId);
           // console.log("Details for Sensor ${sensorId}:", sensorDetails);
           await Models.DetailSensor.create({
@@ -155,6 +185,7 @@ async function main(groupIds) {
             sensorId,
             deviceId: groupId,
             svg: JSON.stringify(svg),
+            csv: JSON.stringify(csv),
           });
 
           const sensorSpeeds = await getSensorSpeeds(sensorId);
