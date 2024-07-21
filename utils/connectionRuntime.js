@@ -147,7 +147,7 @@ async function getHtml(sensorId, sdate, edate) {
     avg: 3600,
     sdate,
     edate,
-    pctavg: param.pctavg,
+    pctavg: 300,
     pctshow: false,
     pct: 95,
     pctmode: false,
