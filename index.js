@@ -46,9 +46,9 @@ app.use(
 
 app.use(router);
 
-setInterval(() => {
-  main(["2138", "2148", "2152"]);
-}, 300000); //milidetik
+// setInterval(() => {
+//   main(["2138", "2148", "2152"]);
+// }, 300000); //milidetik
 
 app.listen(process.env.PORT || 5006, () => {
   console.log("Server running at port 5006");

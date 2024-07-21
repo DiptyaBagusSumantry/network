@@ -96,7 +96,7 @@ class ResponseController {
       weekly: "htmlweekly",
       monthly: "htmlmonthly",
     };
-
+    const attribute = attributeMap[type];
     const where = {
       where: { sensor_id: sensorId },
       attributes: [attributeMap[type]],
@@ -107,7 +107,7 @@ class ResponseController {
       if (!data) {
         return res.send(" Tidak ada data sensor ");
       }
-      res.send(JSON.parse(data.attributeMap[type]));
+      res.send(JSON.parse(data[attribute]));
     });
   }
   static async getSVG(req, res) {

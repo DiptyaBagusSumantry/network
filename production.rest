@@ -1,0 +1,99 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI5ZGFjNTlkLWQ4MjItNDFiNy04OGZjLWVmMmQ2ZjJjNzk2NCIsImlhdCI6MTcyMTQ1OTM4MiwiZXhwIjoxNzIxODA0OTgyfQ.tdGlkncv5EHZ_-Aa9duafKOe-FOBnmtyUJXj4QS8tbY
+
+//login
+###
+POST https://apinetwork.soemantry.com/login
+Content-Type: application/json
+
+{
+    "username" : "admin",
+    "password" : "Admin1234!"
+}
+
+###
+GET https://apinetwork.soemantry.com/monitoring/2152
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET https://apinetwork.soemantry.com/count-dashboard
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET https://apinetwork.soemantry.com/list-sensor?id=2139
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET https://apinetwork.soemantry.com/akses-point
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET https://apinetwork.soemantry.com/list-group-id
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+//Type daily,weekly,monthly
+
+//Historicdata-csv
+###
+GET https://apinetwork.soemantry.com/historicdata-csv?id=2154&type=weekly
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+//Historicdata-html
+###
+GET https://apinetwork.soemantry.com/historicdata-html?id=2154&type=weekly
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+//GET SVG
+###
+GET https://apinetwork.soemantry.com/get-svg?type=graph&graphid=0&id=2154&graphstyling=showLegend%3D%271%27+baseFontSize%3D%275%27 
+Content-Type: application/json
+Authorization: Bearer {{token}} 
+
+//table JSON
+//QUERY ATAU PARAMS
+# content
+# columns
+# filter_device
+# filter_type
+# output
+# sensor_id
+# filter_session
+# count
+# noraw
+# id
+# usecaption
+# filter_user
+
+#type
+#listdevice
+#listsensor
+# datavalues
+
+# ###
+# GET https://apinetwork.soemantry.com/table-json/listdevice?http://127.0.0.1/api/table.json?content=devices&&usecaption=true&filter_parentid=2067&columns=objid,device
+# Content-Type: application/json
+# Authorization: Bearer {{token}}
+
+//table XML
+//QUERY ATAU PARAMS
+# content
+# id
+###
+# GET https://apinetwork.soemantry.com/table-xml?content=
+# Content-Type: application/json
+# Authorization: Bearer {{token}}
+
+//detail sensor
+//QUERY ATAU PARAMS
+# id
+# ###
+# GET https://apinetwork.soemantry.com/detail-sensor?id=2080&usecaption=true
+# Content-Type: application/json
+# Authorization: Bearer {{token}}
+
