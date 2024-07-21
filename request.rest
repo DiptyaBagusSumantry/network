@@ -40,7 +40,7 @@ Authorization: Bearer {{token}}
 
 //Historicdata-csv
 ###
-GET https://apinetwork.soemantry.com/historicdata-csv/monthly?id=2154
+GET http://localhost:5006/historicdata-csv/monthly?id=2154
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
