@@ -60,8 +60,10 @@ class ResponseController {
     const type = req.params.type;
     const sensorId = req.query.id;
 
-    if (!type || !["daily", "weekly", "monthly"].includes(type)) {
-      return res.send("Please Insert Param type daily, weekly, or monthly!");
+    if (!type || !sensorId || !["daily", "weekly", "monthly"].includes(type)) {
+      return res.send(
+        "Please Insert Param type daily, weekly, or monthly! And Please Insert sensorId!"
+      );
     }
 
     const attributeMap = {
@@ -88,8 +90,10 @@ class ResponseController {
     const type = req.params.type;
     const sensorId = req.query.id;
 
-    if (!type || !["daily", "weekly"].includes(type)) {
-      return res.send("Please Insert Param type daily or weekly!");
+    if (!type || !sensorId || !["daily", "weekly"].includes(type)) {
+      return res.send(
+        "Please Insert Param type daily or weekly And Please Insert sensorId!"
+      );
     }
 
     const attributeMap = {
