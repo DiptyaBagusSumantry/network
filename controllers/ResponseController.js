@@ -80,21 +80,34 @@ class ResponseController {
       if (!data) {
         return res.send(" Tidak ada data sensor ");
       }
-      res.send(JSON.parse(data.csv));
+      res.send(JSON.parse(data.attributeMap[type]));
     });
   }
   static async historicDataHTML(req, res) {
-    await Models.DetailSensor.findOne({
-      where: {
-        sensor_id: req.query.id,
-      },
-      attributes: ["html"],
+    const type = req.params.type;
+    const sensorId = req.query.id;
+
+    if (!type || !["daily", "weekly", "monthly"].includes(type)) {
+      return res.send("Please Insert Param type daily, weekly, or monthly!");
+    }
+
+    const attributeMap = {
+      daily: "htmldaily",
+      weekly: "htmlweekly",
+      monthly: "htmlmonthly",
+    };
+
+    const where = {
+      where: { sensor_id: sensorId },
+      attributes: [attributeMap[type]],
       raw: true,
-    }).then((data) => {
+    };
+
+    await Models.DetailSensor.findOne(where).then((data) => {
       if (!data) {
         return res.send(" Tidak ada data sensor ");
       }
-      res.send(JSON.parse(data.html));
+      res.send(JSON.parse(data.attributeMap[type]));
     });
   }
   static async getSVG(req, res) {

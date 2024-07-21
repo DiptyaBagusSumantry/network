@@ -211,14 +211,23 @@ async function main(groupIds) {
           // const csvweekly = await getCsv(sensorId, weekly, edate);
           // const csvmonthly = await getCsv(sensorId, monthly, edate);
           // const html = await getHtml(sensorId, weekly, edate);
-          const [svg, csvdaily, csvweekly, csvmonthly, html] =
-            await Promise.all([
-              getSVG(sensorId),
-              getCsv(sensorId, times.daily, times.edate),
-              getCsv(sensorId, times.weekly, times.edate),
-              getCsv(sensorId, times.monthly, times.edate),
-              getHtml(sensorId, times.weekly, times.edate),
-            ]);
+          const [
+            svg,
+            csvdaily,
+            csvweekly,
+            csvmonthly,
+            htmldaily,
+            htmlweekly,
+            htmlmonthly,
+          ] = await Promise.all([
+            getSVG(sensorId),
+            getCsv(sensorId, times.daily, times.edate),
+            getCsv(sensorId, times.weekly, times.edate),
+            getCsv(sensorId, times.monthly, times.edate),
+            getHtml(sensorId, times.daily, times.edate),
+            getHtml(sensorId, times.weekly, times.edate),
+            getHtml(sensorId, times.monthly, times.edate),
+          ]);
 
           const sensorDetails = await getSensorDetails(sensorId);
           await Models.DetailSensor.create({
@@ -230,7 +239,9 @@ async function main(groupIds) {
             csvdaily: JSON.stringify(csvdaily),
             csvweekly: JSON.stringify(csvweekly),
             csvmonthly: JSON.stringify(csvmonthly),
-            html: JSON.stringify(html),
+            htmldaily: JSON.stringify(htmldaily),
+            htmlweekly: JSON.stringify(htmlweekly),
+            htmlmonthly: JSON.stringify(htmlmonthly),
           });
 
           const sensorSpeeds = await getSensorSpeeds(sensorId);
