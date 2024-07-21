@@ -69,10 +69,11 @@ class ResponseController {
       weekly: "csvweekly",
       monthly: "csvmonthly",
     };
+    const attribute = attributeMap[type];
 
     const where = {
       where: { sensor_id: sensorId },
-      attributes: [attributeMap[type]],
+      attributes: [attribute],
       raw: true,
     };
 
@@ -80,7 +81,7 @@ class ResponseController {
       if (!data) {
         return res.send(" Tidak ada data sensor ");
       }
-      res.send(JSON.parse(data.attributeMap[type]));
+      res.send(JSON.parse(data[attribute]));
     });
   }
   static async historicDataHTML(req, res) {
@@ -99,7 +100,7 @@ class ResponseController {
     const attribute = attributeMap[type];
     const where = {
       where: { sensor_id: sensorId },
-      attributes: [attributeMap[type]],
+      attributes: [attribute],
       raw: true,
     };
 
