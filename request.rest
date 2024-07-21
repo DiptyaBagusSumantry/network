@@ -54,6 +54,7 @@ GET http://localhost:5006/historicdata-csv/monthly?id=2154
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
+//Type daily or weekly
 //Historicdata-html
 ###
 GET http://localhost:5006/historicdata-html/monthly?id=2154
