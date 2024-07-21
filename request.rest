@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MzYzM2U1LTRiZjAtNGE3MC04NjkzLTU0NjEyYTQ0NzIwOSIsImlhdCI6MTcyMTE0MDA2OSwiZXhwIjoxNzIxNDg1NjY5fQ.BNln2a0Dl_tMJhx2hpp6kk-IG6881K4Ot8BWG1W8bLQ
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI5ZGFjNTlkLWQ4MjItNDFiNy04OGZjLWVmMmQ2ZjJjNzk2NCIsImlhdCI6MTcyMTQ1OTM4MiwiZXhwIjoxNzIxODA0OTgyfQ.tdGlkncv5EHZ_-Aa9duafKOe-FOBnmtyUJXj4QS8tbY
 
 //login
 ###
@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5006/monitoring/2148
+GET http://localhost:5006/monitoring/2152
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -36,15 +36,17 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 
+//Type daily,weekly,monthly
+
 //Historicdata-csv
 ###
-GET http://localhost:5006/historicdata-csv?id=2069&avg=3600&sdate=2024-07-13-00-00-00&edate=2024-07-14-00-00-00&usecaption=1
+GET https://apinetwork.soemantry.com/historicdata-csv/monthly?id=2154
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 //Historicdata-html
 ###
-GET http://localhost:5006/historicdata-html?id=2069&sdate=2024-07-13-08-23-00&edate=2024-07-14-08-23-00&avg=3600&pctavg=300&pctshow=false&pct=95&pctmode=false&hide=NaN
+GET http://localhost:5006/historicdata-html/monthly?id=2154
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

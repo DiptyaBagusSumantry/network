@@ -22,12 +22,12 @@ router.get("/count-dashboard", verifyToken, DashboardController.countDashboard);
 router.get("/list-sensor", verifyToken, ListSensorController.getListSensorById);
 router.get("/akses-point", verifyToken, ListDeviceController.getDevice);
 router.get(
-  "/historicdata-csv",
+  "/historicdata-csv/:type",
   verifyToken,
   ResponseController.historicDataCSV
 );
 router.get(
-  "/historicdata-html",
+  "/historicdata-html/:type",
   verifyToken,
   ResponseController.historicDataHTML
 );
