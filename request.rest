@@ -10,6 +10,16 @@ Content-Type: application/json
     "password" : "Admin1234!"
 }
 
+//loregister
+###
+POST http://localhost:5006/register
+Content-Type: application/json
+
+{
+    "username" : "admin",
+    "password" : "Admin1234!"
+}
+
 ###
 GET http://localhost:5006/monitoring/2152
 Content-Type: application/json

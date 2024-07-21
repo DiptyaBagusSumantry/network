@@ -8,6 +8,7 @@ const DashboardController = require("../controllers/DashboardController.js");
 const ListDeviceController = require("../controllers/ListDeviceController.js");
 
 router.post("/login", AuthController.Login);
+router.post("/register", AuthController.register);
 // router.get("/table-json/:type", verifyToken, ResponseController.tableJson);
 // router.get("/table-xml", verifyToken, ResponseController.tableXML);
 // router.get("/detail-sensor", verifyToken, ResponseController.detailSensor);

@@ -69,23 +69,19 @@ class AuthController {
   //   }
   // }
 
-  // static async register(req, res) {
-  //   try {
-  //     const { username, password, role, fullname, phone, email } = req.body;
+  static async register(req, res) {
+    try {
+      const { username, password} = req.body;
 
-  //     await Models.User.create({
-  //       username,
-  //       password,
-  //       role,
-  //       fullname,
-  //       phone,
-  //       email,
-  //     })
-  //     handleCreate(res)
-  //   } catch (error) {
-  //     handlerError(res, error);
-  //   }
-  // }
+      await Models.User.create({
+        username,
+        password,
+      })
+      handleCreate(res)
+    } catch (error) {
+      handlerError(res, error);
+    }
+  }
 
   // static async Logout(req, res) {
   //   try {
