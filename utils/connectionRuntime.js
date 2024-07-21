@@ -178,7 +178,7 @@ async function main(groupIds) {
       monthly: now.clone().subtract(1, "months").format("YYYY-MM-DD-HH-mm-ss"),
       edate: now.format("YYYY-MM-DD-HH-mm-ss"),
     };
-    
+
     await truncateTables();
 
     for (const groupId of groupIds) {
@@ -205,29 +205,22 @@ async function main(groupIds) {
 
         for (const sensor of sensors.sensor) {
           const sensorId = sensor.objid;
-          
+
           // const svg = await getSVG(sensorId);
           // const csvdaily = await getCsv(sensorId, daily, edate);
           // const csvweekly = await getCsv(sensorId, weekly, edate);
           // const csvmonthly = await getCsv(sensorId, monthly, edate);
           // const html = await getHtml(sensorId, weekly, edate);
-          const [
-            svg,
-            csvdaily,
-            csvweekly,
-            csvmonthly,
-            htmldaily,
-            htmlweekly,
-            htmlmonthly,
-          ] = await Promise.all([
-            getSVG(sensorId),
-            getCsv(sensorId, times.daily, times.edate),
-            getCsv(sensorId, times.weekly, times.edate),
-            getCsv(sensorId, times.monthly, times.edate),
-            getHtml(sensorId, times.daily, times.edate),
-            getHtml(sensorId, times.weekly, times.edate),
-            getHtml(sensorId, times.monthly, times.edate),
-          ]);
+          const [svg, csvdaily, csvweekly, csvmonthly, htmldaily, htmlweekly] =
+            await Promise.all([
+              getSVG(sensorId),
+              getCsv(sensorId, times.daily, times.edate),
+              getCsv(sensorId, times.weekly, times.edate),
+              getCsv(sensorId, times.monthly, times.edate),
+              getHtml(sensorId, times.daily, times.edate),
+              getHtml(sensorId, times.weekly, times.edate),
+              getHtml(sensorId, times.monthly, times.edate),
+            ]);
 
           const sensorDetails = await getSensorDetails(sensorId);
           await Models.DetailSensor.create({
@@ -241,7 +234,6 @@ async function main(groupIds) {
             csvmonthly: JSON.stringify(csvmonthly),
             htmldaily: JSON.stringify(htmldaily),
             htmlweekly: JSON.stringify(htmlweekly),
-            htmlmonthly: JSON.stringify(htmlmonthly),
           });
 
           const sensorSpeeds = await getSensorSpeeds(sensorId);
