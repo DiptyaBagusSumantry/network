@@ -46,7 +46,6 @@ app.use(
 
 app.use(router);
 
-main(["2138", "2148", "2152"]);
 setInterval(() => {
   main(["2138", "2148", "2152"]);
 }, 300000); //milidetik

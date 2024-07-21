@@ -140,6 +140,31 @@ async function getCsv(sensorId, sdate, edate) {
   }
 }
 
+async function getHtml(sensorId, sdate, edate) {
+  const params = {
+    apitoken: apiToken,
+    id: sensorId,
+    avg: 3600,
+    sdate,
+    edate,
+    pctavg: param.pctavg,
+    pctshow: false,
+    pct: 95,
+    pctmode: false,
+    hide: NaN,
+  };
+  try {
+    const response = await axiosInstance.get(`/historicdata_html.htm`, {
+      params,
+    });
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error.response.data);
+    return { errorConnection: error.response.data };
+  }
+}
+
 async function main(groupIds) {
   try {
     const sdate = moment()
@@ -176,6 +201,7 @@ async function main(groupIds) {
 
           const svg = await getSVG(sensorId);
           const csv = await getCsv(sensorId, sdate, edate);
+          const html = await getHtml(sensorId, sdate, edate);
 
           const sensorDetails = await getSensorDetails(sensorId);
           // console.log("Details for Sensor ${sensorId}:", sensorDetails);
@@ -186,6 +212,7 @@ async function main(groupIds) {
             deviceId: groupId,
             svg: JSON.stringify(svg),
             csv: JSON.stringify(csv),
+            html: JSON.stringify(html),
           });
 
           const sensorSpeeds = await getSensorSpeeds(sensorId);

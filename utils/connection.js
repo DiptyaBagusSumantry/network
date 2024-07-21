@@ -100,17 +100,19 @@ class connectionPRTG {
   static async historicDataHTML(param) {
     const params = {
       apitoken: apiToken,
-      ...(param.content && { content: param.content }),
       ...(param.id && { id: param.id }),
-      ...(param.avg && { avg: param.avg }),
       ...(param.sdate && { sdate: param.sdate }),
       ...(param.edate && { edate: param.edate }),
-      ...(param.usecaption && { usecaption: param.usecaption }),
+      ...(param.avg && { avg: param.avg }),
       ...(param.pctavg && { pctavg: param.pctavg }),
       ...(param.pctshow && { pctshow: param.pctshow }),
       ...(param.pct && { pct: param.pct }),
       ...(param.pctmode && { pctmode: param.pctmode }),
       ...(param.hide && { hide: param.hide }),
+
+
+      ...(param.content && { content: param.content }),
+      ...(param.usecaption && { usecaption: param.usecaption }),
     };
     try {
       const response = await axiosInstance.get(`/historicdata_html.htm`, {
