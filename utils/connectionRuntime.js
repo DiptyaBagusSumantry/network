@@ -167,13 +167,20 @@ async function getHtml(sensorId, sdate, edate) {
 
 async function main(groupIds) {
   try {
-    const sdate = moment()
-      .subtract(7, "days")
-      .format("YYYY-MM-DD-00-00-00");
-    const edate = moment().format("YYYY-MM-DD-00-00-00");
-
-    await truncateTables();
+    // const daily = moment().subtract(24, "hours").format("YYYY-MM-DD-HH-mm-ss");
+    // const weekly = moment().subtract(7, "days").format("YYYY-MM-DD-HH-mm-ss");
+    // const monthly = moment().subtract(1, "months").format("YYYY-MM-DD-HH-mm-ss");
+    // const edate = moment().format("YYYY-MM-DD-HH-mm-ss");
+    const now = moment();
+    const times = {
+      daily: now.clone().subtract(24, "hours").format("YYYY-MM-DD-HH-mm-ss"),
+      weekly: now.clone().subtract(7, "days").format("YYYY-MM-DD-HH-mm-ss"),
+      monthly: now.clone().subtract(1, "months").format("YYYY-MM-DD-HH-mm-ss"),
+      edate: now.format("YYYY-MM-DD-HH-mm-ss"),
+    };
     
+    await truncateTables();
+
     for (const groupId of groupIds) {
       const devices = await getDevicesInGroup(groupId);
       // console.log("Devices for Group ${groupId}:", devices);
@@ -198,25 +205,35 @@ async function main(groupIds) {
 
         for (const sensor of sensors.sensor) {
           const sensorId = sensor.objid;
-
-          const svg = await getSVG(sensorId);
-          const csv = await getCsv(sensorId, sdate, edate);
-          const html = await getHtml(sensorId, sdate, edate);
+          
+          // const svg = await getSVG(sensorId);
+          // const csvdaily = await getCsv(sensorId, daily, edate);
+          // const csvweekly = await getCsv(sensorId, weekly, edate);
+          // const csvmonthly = await getCsv(sensorId, monthly, edate);
+          // const html = await getHtml(sensorId, weekly, edate);
+          const [svg, csvdaily, csvweekly, csvmonthly, html] =
+            await Promise.all([
+              getSVG(sensorId),
+              getCsv(sensorId, times.daily, times.edate),
+              getCsv(sensorId, times.weekly, times.edate),
+              getCsv(sensorId, times.monthly, times.edate),
+              getHtml(sensorId, times.weekly, times.edate),
+            ]);
 
           const sensorDetails = await getSensorDetails(sensorId);
-          // console.log("Details for Sensor ${sensorId}:", sensorDetails);
           await Models.DetailSensor.create({
             prtg_version: sensorDetails.prtgversion,
             sensordata: JSON.stringify(sensorDetails.sensordata),
             sensorId,
             deviceId: groupId,
             svg: JSON.stringify(svg),
-            csv: JSON.stringify(csv),
+            csvdaily: JSON.stringify(csvdaily),
+            csvweekly: JSON.stringify(csvweekly),
+            csvmonthly: JSON.stringify(csvmonthly),
             html: JSON.stringify(html),
           });
 
           const sensorSpeeds = await getSensorSpeeds(sensorId);
-          // console.log("Speeds for Sensor ${sensorId}:", sensorSpeeds.values.length);
           const lastValue = sensorSpeeds.values[sensorSpeeds.values.length - 1];
           await Models.DataValues.create({
             prtg_version: sensorSpeeds.prtgversion,

@@ -57,13 +57,26 @@ class ResponseController {
   //   handleGet(res, data);
   // }
   static async historicDataCSV(req, res) {
-    await Models.DetailSensor.findOne({
-      where: {
-        sensor_id: req.query.id,
-      },
-      attributes: ["csv"],
+    const type = req.params.type;
+    const sensorId = req.query.id;
+
+    if (!type || !["daily", "weekly", "monthly"].includes(type)) {
+      return res.send("Please Insert Param type daily, weekly, or monthly!");
+    }
+
+    const attributeMap = {
+      daily: "csvdaily",
+      weekly: "csvweekly",
+      monthly: "csvmonthly",
+    };
+
+    const where = {
+      where: { sensor_id: sensorId },
+      attributes: [attributeMap[type]],
       raw: true,
-    }).then((data) => {
+    };
+
+    await Models.DetailSensor.findOne(where).then((data) => {
       if (!data) {
         return res.send(" Tidak ada data sensor ");
       }
